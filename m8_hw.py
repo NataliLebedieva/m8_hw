@@ -113,8 +113,8 @@ class AddressBook(UserDict):
                 return pickle.load(f)
         except FileNotFoundError:
             return AddressBook()
-# def __str__(self):
-#     return '\n'.join(str(record) for record in self.data.values())
+def __str__(self):
+    return '\n'.join(str(record) for record in self.data.values())
 
 # Function decorators
 def input_error(func):
