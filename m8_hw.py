@@ -141,6 +141,22 @@ def add_contact(args, book):
     if phone:
         record.add_phone(phone)
     return message
+@input_error
+def change_phone(args, book):
+    name, old_phone, new_phone = args
+    record = book.find(name)
+    if record:
+        record.edit_phone(old_phone, new_phone)
+        return "Phone number updated."
+    return "Contact not found."
+
+@input_error
+def show_phone(args, book):
+    name = args[0]
+    record = book.find(name)
+    if record:
+        return f"Phones for {name}: {'; '.join(p.value for p in record.phones)}"
+    return "Contact not found."
 
 @input_error
 def add_birthday(args, book):
@@ -215,7 +231,7 @@ def main():
             print(show_phone(args, book))
 
         elif command == "all":
-            print(show_all(book))
+            print(book)
 
         elif command == "add-birthday":
             print(add_birthday(args, book))
